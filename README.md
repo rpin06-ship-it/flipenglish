@@ -1,6 +1,6 @@
 # FlipEnglish 🃏
 
-Des flashcards ludiques pour apprendre ses premiers mots d'anglais, thème par thème.
+Des flashcards ludiques pour apprendre l'anglais, thème par thème, sur 3 niveaux (Débutant, Intermédiaire, Avancé). Un niveau se débloque quand on maîtrise 80 % des mots du précédent.
 
 ## Lancer le site sur votre ordinateur
 
@@ -16,7 +16,9 @@ Des flashcards ludiques pour apprendre ses premiers mots d'anglais, thème par t
 
 ## Ajouter ou modifier des mots
 
-Tous les mots sont dans `data/words.json`. Chaque thème a un `id` (sans espace ni accent), un `name`, un `emoji`, une `color` et une liste `words` de paires `{ "fr": "...", "en": "..." }`. Redémarrez le serveur après une modification.
+Tous les mots sont dans `data/words.json`, rangés par niveau. Chaque niveau a un `id`, un `name`, un `emoji` et une liste `themes`. Chaque thème a un `id` unique (sans espace ni accent), un `name`, un `emoji`, une `color` et une liste `words` de paires `{ "fr": "...", "en": "..." }`. Redémarrez le serveur après une modification.
+
+Le seuil de déblocage se règle dans `public/script.js` (`UNLOCK_THRESHOLD`).
 
 ## Mettre le site en ligne avec GitHub et Render
 
@@ -38,8 +40,8 @@ Tous les mots sont dans `data/words.json`. Chaque thème a un `id` (sans espace 
 
 | Fichier | Rôle |
 | --- | --- |
-| `server.js` | Serveur Express : sert le site et l'API `/api/themes` |
-| `data/words.json` | Les thèmes et leurs mots |
+| `server.js` | Serveur Express : sert le site et l'API (`/api/levels`, `/api/themes/:id`) |
+| `data/words.json` | Les niveaux, leurs thèmes et leurs mots |
 | `public/index.html` | La page (accueil, révision, bilan) |
 | `public/style.css` | Le design |
 | `public/script.js` | Les cartes, la prononciation et la progression |

@@ -41,7 +41,10 @@ function setKnown(themeId, englishWord, isKnown) {
 }
 
 let progress = loadProgress();
-let themes = []; // liste des thèmes reçue du serveur
+let levels = []; // niveaux et thèmes reçus du serveur
+
+// Pourcentage du niveau précédent à maîtriser pour débloquer le suivant.
+const UNLOCK_THRESHOLD = 0.8;
 
 // ---------- État de la séance de révision ----------
 let session = null;
@@ -62,11 +65,11 @@ function showView(name) {
 }
 
 // ---------- Accueil ----------
-async function loadThemes() {
+async function loadLevels() {
   try {
-    const res = await fetch('/api/themes');
+    const res = await fetch('/api/levels');
     if (!res.ok) throw new Error();
-    themes = await res.json();
+    levels = await res.json();
     renderHome();
   } catch {
     const error = $('home-error');
@@ -75,38 +78,90 @@ async function loadThemes() {
   }
 }
 
+// Nombre de mots sus dans un thème (jamais plus que le nombre de mots du thème).
+function knownCount(theme) {
+  return Math.min((progress[theme.id] || []).length, theme.count);
+}
+
+// Mots sus et mots au total pour un niveau entier.
+function levelStats(level) {
+  let known = 0;
+  let total = 0;
+  level.themes.forEach((theme) => {
+    known += knownCount(theme);
+    total += theme.count;
+  });
+  return { known, total };
+}
+
+function createThemeCard(theme, locked) {
+  const known = knownCount(theme);
+  const percent = Math.round((known / theme.count) * 100);
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'theme-card';
+  button.disabled = locked;
+  button.style.setProperty('--theme-color', theme.color);
+  button.innerHTML = `
+    <div class="theme-top">
+      <span class="theme-emoji">${locked ? '🔒' : theme.emoji}</span>
+      <div>
+        <div class="theme-name">${theme.name}</div>
+        <div class="theme-meta">${known} / ${theme.count} mots appris</div>
+      </div>
+      ${percent === 100 ? '<span class="badge">Maîtrisé</span>' : ''}
+    </div>
+    <div class="bar" aria-label="${percent} % appris">
+      <div class="bar-fill" style="width: ${percent}%"></div>
+    </div>
+  `;
+  if (!locked) button.addEventListener('click', () => startTheme(theme.id));
+  return button;
+}
+
 function renderHome() {
-  const grid = $('theme-grid');
-  grid.innerHTML = '';
+  const container = $('levels');
+  container.innerHTML = '';
 
   let totalWords = 0;
   let totalKnown = 0;
+  let previous = null; // statistiques du niveau précédent
 
-  themes.forEach((theme) => {
-    const known = (progress[theme.id] || []).length;
-    const percent = Math.round((known / theme.count) * 100);
-    totalWords += theme.count;
-    totalKnown += known;
+  levels.forEach((level) => {
+    const stats = levelStats(level);
+    totalWords += stats.total;
+    totalKnown += stats.known;
 
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'theme-card';
-    button.style.setProperty('--theme-color', theme.color);
-    button.innerHTML = `
-      <div class="theme-top">
-        <span class="theme-emoji">${theme.emoji}</span>
-        <div>
-          <div class="theme-name">${theme.name}</div>
-          <div class="theme-meta">${known} / ${theme.count} mots appris</div>
-        </div>
-        ${percent === 100 ? '<span class="badge">Maîtrisé</span>' : ''}
-      </div>
-      <div class="bar" aria-label="${percent} % appris">
-        <div class="bar-fill" style="width: ${percent}%"></div>
-      </div>
+    // Le premier niveau est toujours ouvert ; les suivants demandent 80 % du précédent.
+    const needed = previous ? Math.ceil(previous.total * UNLOCK_THRESHOLD) : 0;
+    const locked = previous !== null && previous.known < needed;
+
+    const section = document.createElement('section');
+    section.className = `level${locked ? ' is-locked' : ''}`;
+
+    const header = document.createElement('div');
+    header.className = 'level-header';
+    header.innerHTML = `
+      <h2 class="level-title">${level.emoji} ${level.name}</h2>
+      <span class="level-count">${stats.known} / ${stats.total} mots</span>
     `;
-    button.addEventListener('click', () => startTheme(theme.id));
-    grid.appendChild(button);
+    section.appendChild(header);
+
+    if (locked) {
+      const hint = document.createElement('p');
+      hint.className = 'level-lock';
+      hint.textContent = `🔒 Maîtrise encore ${needed - previous.known} mot${needed - previous.known > 1 ? 's' : ''} du niveau ${previous.name} pour débloquer ce niveau.`;
+      section.appendChild(hint);
+    }
+
+    const grid = document.createElement('div');
+    grid.className = 'theme-grid';
+    level.themes.forEach((theme) => grid.appendChild(createThemeCard(theme, locked)));
+    section.appendChild(grid);
+
+    container.appendChild(section);
+    previous = { ...stats, name: level.name };
   });
 
   $('overall-count').textContent = `${totalKnown} / ${totalWords} mots`;
@@ -307,4 +362,4 @@ document.addEventListener('keydown', (event) => {
 // Certains navigateurs chargent les voix en différé.
 if (canSpeak) window.speechSynthesis.getVoices();
 
-loadThemes();
+loadLevels();
