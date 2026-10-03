@@ -1,0 +1,140 @@
+[
+  {
+    "id": "salutations",
+    "name": "Salutations",
+    "emoji": "👋",
+    "color": "#ff7a59",
+    "words": [
+      { "fr": "bonjour", "en": "hello" },
+      { "fr": "salut", "en": "hi" },
+      { "fr": "au revoir", "en": "goodbye" },
+      { "fr": "bonjour (le matin)", "en": "good morning" },
+      { "fr": "bonsoir", "en": "good evening" },
+      { "fr": "bonne nuit", "en": "good night" },
+      { "fr": "s'il vous plaît", "en": "please" },
+      { "fr": "merci", "en": "thank you" },
+      { "fr": "de rien", "en": "you're welcome" },
+      { "fr": "pardon", "en": "sorry" },
+      { "fr": "excusez-moi", "en": "excuse me" },
+      { "fr": "oui", "en": "yes" },
+      { "fr": "non", "en": "no" },
+      { "fr": "comment ça va ?", "en": "how are you?" },
+      { "fr": "à bientôt", "en": "see you soon" }
+    ]
+  },
+  {
+    "id": "chiffres",
+    "name": "Chiffres",
+    "emoji": "🔢",
+    "color": "#4c8dff",
+    "words": [
+      { "fr": "un", "en": "one" },
+      { "fr": "deux", "en": "two" },
+      { "fr": "trois", "en": "three" },
+      { "fr": "quatre", "en": "four" },
+      { "fr": "cinq", "en": "five" },
+      { "fr": "six", "en": "six" },
+      { "fr": "sept", "en": "seven" },
+      { "fr": "huit", "en": "eight" },
+      { "fr": "neuf", "en": "nine" },
+      { "fr": "dix", "en": "ten" },
+      { "fr": "onze", "en": "eleven" },
+      { "fr": "douze", "en": "twelve" },
+      { "fr": "vingt", "en": "twenty" },
+      { "fr": "cinquante", "en": "fifty" },
+      { "fr": "cent", "en": "one hundred" }
+    ]
+  },
+  {
+    "id": "couleurs",
+    "name": "Couleurs",
+    "emoji": "🎨",
+    "color": "#b05cff",
+    "words": [
+      { "fr": "rouge", "en": "red" },
+      { "fr": "bleu", "en": "blue" },
+      { "fr": "vert", "en": "green" },
+      { "fr": "jaune", "en": "yellow" },
+      { "fr": "orange", "en": "orange" },
+      { "fr": "violet", "en": "purple" },
+      { "fr": "rose", "en": "pink" },
+      { "fr": "noir", "en": "black" },
+      { "fr": "blanc", "en": "white" },
+      { "fr": "gris", "en": "grey" },
+      { "fr": "marron", "en": "brown" },
+      { "fr": "doré", "en": "gold" },
+      { "fr": "argenté", "en": "silver" },
+      { "fr": "clair", "en": "light" },
+      { "fr": "foncé", "en": "dark" }
+    ]
+  },
+  {
+    "id": "nourriture",
+    "name": "Nourriture",
+    "emoji": "🍎",
+    "color": "#22b07d",
+    "words": [
+      { "fr": "le pain", "en": "bread" },
+      { "fr": "l'eau", "en": "water" },
+      { "fr": "le lait", "en": "milk" },
+      { "fr": "le fromage", "en": "cheese" },
+      { "fr": "la pomme", "en": "apple" },
+      { "fr": "la banane", "en": "banana" },
+      { "fr": "l'œuf", "en": "egg" },
+      { "fr": "le poulet", "en": "chicken" },
+      { "fr": "le poisson", "en": "fish" },
+      { "fr": "le riz", "en": "rice" },
+      { "fr": "les pâtes", "en": "pasta" },
+      { "fr": "le sucre", "en": "sugar" },
+      { "fr": "le sel", "en": "salt" },
+      { "fr": "le café", "en": "coffee" },
+      { "fr": "le gâteau", "en": "cake" }
+    ]
+  },
+  {
+    "id": "famille",
+    "name": "Famille",
+    "emoji": "👨‍👩‍👧",
+    "color": "#ff5c8a",
+    "words": [
+      { "fr": "la mère", "en": "mother" },
+      { "fr": "le père", "en": "father" },
+      { "fr": "les parents", "en": "parents" },
+      { "fr": "le frère", "en": "brother" },
+      { "fr": "la sœur", "en": "sister" },
+      { "fr": "le fils", "en": "son" },
+      { "fr": "la fille", "en": "daughter" },
+      { "fr": "le grand-père", "en": "grandfather" },
+      { "fr": "la grand-mère", "en": "grandmother" },
+      { "fr": "l'oncle", "en": "uncle" },
+      { "fr": "la tante", "en": "aunt" },
+      { "fr": "le cousin", "en": "cousin" },
+      { "fr": "le mari", "en": "husband" },
+      { "fr": "la femme (épouse)", "en": "wife" },
+      { "fr": "le bébé", "en": "baby" }
+    ]
+  },
+  {
+    "id": "animaux",
+    "name": "Animaux",
+    "emoji": "🐶",
+    "color": "#f5a623",
+    "words": [
+      { "fr": "le chien", "en": "dog" },
+      { "fr": "le chat", "en": "cat" },
+      { "fr": "l'oiseau", "en": "bird" },
+      { "fr": "le cheval", "en": "horse" },
+      { "fr": "la vache", "en": "cow" },
+      { "fr": "le cochon", "en": "pig" },
+      { "fr": "le mouton", "en": "sheep" },
+      { "fr": "la souris", "en": "mouse" },
+      { "fr": "le lapin", "en": "rabbit" },
+      { "fr": "le canard", "en": "duck" },
+      { "fr": "le lion", "en": "lion" },
+      { "fr": "l'ours", "en": "bear" },
+      { "fr": "le singe", "en": "monkey" },
+      { "fr": "le serpent", "en": "snake" },
+      { "fr": "le poisson", "en": "fish" }
+    ]
+  }
+]

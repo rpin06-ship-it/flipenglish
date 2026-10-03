@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Des flashcards ludiques pour apprendre ses premiers mots d'anglais.">
+  <title>FlipEnglish · Apprends l'anglais en t'amusant</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="logo" id="logo" type="button" aria-label="Retour à l'accueil">
+      <span class="logo-icon">🃏</span> Flip<span class="logo-accent">English</span>
+    </button>
+  </header>
+
+  <main>
+    <!-- Accueil : liste des thèmes -->
+    <section id="home-view" class="view">
+      <div class="hero">
+        <h1>Apprends tes premiers mots d'anglais</h1>
+        <p>Choisis un thème, retourne les cartes et écoute la prononciation.</p>
+      </div>
+
+      <div class="overall" id="overall">
+        <div class="overall-text">
+          <span>Ta progression</span>
+          <strong id="overall-count">0 / 0 mots</strong>
+        </div>
+        <div class="bar"><div class="bar-fill" id="overall-bar"></div></div>
+      </div>
+
+      <div class="theme-grid" id="theme-grid" aria-live="polite"></div>
+      <p class="error" id="home-error" hidden></p>
+
+      <button class="link-btn" id="reset-btn" type="button">Remettre ma progression à zéro</button>
+    </section>
+
+    <!-- Révision : une carte à la fois -->
+    <section id="study-view" class="view" hidden>
+      <div class="study-header">
+        <button class="icon-btn" id="quit-btn" type="button" aria-label="Quitter la révision">✕</button>
+        <div class="bar study-bar"><div class="bar-fill" id="study-bar"></div></div>
+        <span class="study-count" id="study-count">0 / 0</span>
+      </div>
+
+      <h2 class="study-title" id="study-title"></h2>
+
+      <div class="card-scene">
+        <div class="card" id="card" role="button" tabindex="0" aria-label="Retourner la carte">
+          <div class="card-face card-front">
+            <span class="card-label">Français</span>
+            <span class="card-word" id="card-fr"></span>
+            <span class="card-hint">Touche pour retourner</span>
+          </div>
+          <div class="card-face card-back">
+            <span class="card-label">Anglais</span>
+            <span class="card-word" id="card-en"></span>
+            <button class="speak-btn" id="speak-btn" type="button" aria-label="Écouter la prononciation">🔊 Écouter</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="flip-btn" type="button">Retourner la carte</button>
+        <div class="answer-btns" id="answer-btns" hidden>
+          <button class="btn btn-review" id="review-btn" type="button">🔁 À revoir</button>
+          <button class="btn btn-known" id="known-btn" type="button">✅ Je savais</button>
+        </div>
+      </div>
+      <p class="keyboard-tip">Astuce clavier : Espace pour retourner, ← à revoir, → je savais</p>
+    </section>
+
+    <!-- Bilan de fin de thème -->
+    <section id="summary-view" class="view" hidden>
+      <div class="summary-card">
+        <div class="summary-emoji" id="summary-emoji">🎉</div>
+        <h2 id="summary-title">Bravo !</h2>
+        <p class="summary-score" id="summary-score"></p>
+        <div class="review-list" id="review-list" hidden>
+          <h3>Mots à retravailler</h3>
+          <ul id="review-words"></ul>
+        </div>
+        <div class="summary-actions">
+          <button class="btn btn-primary" id="restart-btn" type="button">Recommencer ce thème</button>
+          <button class="btn btn-ghost" id="home-btn" type="button">Retour aux thèmes</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Fait avec ❤️ pour apprendre l'anglais</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
